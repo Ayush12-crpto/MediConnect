@@ -1,0 +1,57 @@
+# Node dependency directories
+node_modules/
+
+# Python Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Secrets / Environment variables / Keys
+.env
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+.env.staging.local
+*.key
+*.pem
+*.pfx
+*.cer
+*.crt
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+out/
+
+# Python cache and compiled files
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Large Machine Learning artifacts
+*.sav
+*.joblib
+*.pkl
+*.h5
+*.onnx
+
+# Stack dumps / Crash logs
+*.stackdump
+*.log
+logs/
+
+# System / Editor directories
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

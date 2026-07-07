@@ -1,0 +1,26 @@
+# Virtual environment
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Large Model files (Trained models and Scalers)
+*.sav
+*.joblib
+*.pkl
+*.h5
+*.onnx
+
+# Data files (CSV/JSON datasets)
+# (Optional: uncomment if you want to exclude all datasets from Git)
+# *.csv
+
+# System / Temp files
+*.stackdump
+.DS_Store

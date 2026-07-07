@@ -1,0 +1,92 @@
+import React, { useContext, useState } from 'react'
+import {assets} from '../assets/assets'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { AppContext } from '../context/AppContext';
+const Navbar = () => {
+  const navigate=useNavigate();
+
+  const [showMenu,setShowMenu]=useState(false)
+  const {token,setToken,userData}=useContext(AppContext)
+  const logout=()=>{
+    setToken(false)
+    navigate('/')
+    localStorage.removeItem('token')
+  }
+  
+    return (
+    <div className='flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400'>
+        <div onClick={() => navigate('/')} className='flex items-center gap-2 cursor-pointer'>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-primary">
+                <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v5.25H6a.75.75 0 000 1.5h5.25V18a.75.75 0 001.5 0v-5.25H18a.75.75 0 000-1.5h-5.25V6z" clipRule="evenodd" />
+            </svg>
+            <span className='text-2xl font-bold text-gray-800 tracking-tight'>
+                Medi<span className='text-primary'>Connect</span>
+            </span>
+        </div>
+        <ul className='hidden md:flex items-start gap-5 font-medium'>
+            <NavLink to='/'>
+                <li className='py-1'>HOME</li>
+                <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'/>
+            </NavLink>
+            <NavLink to='/doctors'>
+                <li className='py-1'>ALL DOCTORS</li>
+                <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'/>
+            </NavLink>
+            <NavLink to='/about'>
+                <li className='py-1'>ABOUT</li>
+                <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'/>
+            </NavLink>
+            <NavLink to='/contact'>
+                <li className='py-1'>CONTACT</li>
+                <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'/>
+            </NavLink>
+            <NavLink to='/disease-predictor'>
+                <li className='py-1'>DISEASE PREDICTOR</li>
+                <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden'/>
+            </NavLink>
+        </ul>
+        <div className='flex item-center gap-4'>
+            {
+                token && userData
+                ? <div className='flex items-center gap-2 cursor-pointer group relative'>
+                    <img className='w-8 rounded-full 'src={userData.image} alt="" />
+                    <img className='w-2.5'src={assets.dropdown_icon} alt="" />
+                    <div className='absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block'>
+                        <div className='min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4'>
+                            <p onClick={()=>navigate('my-profile')} className='hover:text-black cursor-pointer'>My Profile</p>
+                            <p onClick={()=>navigate('my-appointments')} className='hover:text-black cursor-pointer'>My Appointments</p>
+                            <p onClick={logout} className='hover:text-black cursor-pointer'>Logout</p>
+                        </div>
+                    </div>
+                </div>
+                :<button onClick={()=>navigate('/login')} className='bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block hover:shadow-[0_0_1px_1px_gray] transition-all duration-300'>Create Account</button>
+            }
+            <img onClick={()=>setShowMenu(true)} className='w-6 md:hidden'  src={assets.menu_icon} alt="" />
+            {/*-----Mobile menu------*/}
+ 
+            <div className={`${showMenu?'fixed w-full bg-opacity-50 backdrop-blur-md':'h-0 w-0'} md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all`}>
+                <div className='flex items-center justify-between px-5 py-6'>
+                    <div className='flex items-center gap-2'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-primary">
+                            <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v5.25H6a.75.75 0 000 1.5h5.25V18a.75.75 0 001.5 0v-5.25H18a.75.75 0 000-1.5h-5.25V6z" clipRule="evenodd" />
+                        </svg>
+                        <span className='text-2xl font-bold text-gray-800 tracking-tight'>Medi<span className='text-primary'>Connect</span></span>
+                    </div>
+                    <img className='w-7' onClick={()=>setShowMenu(false)} src={assets.cross_icon} alt="" />
+                </div>
+                <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>
+                    <NavLink onClick={()=>setShowMenu(false)} to='/'><p className='px-4 py-2 rounded inline-block hover:bg-blue-50'>HOME</p></NavLink>
+                    <NavLink onClick={()=>setShowMenu(false)} to='/doctors'><p className='px-4 py-2 rounded inline-block hover:bg-blue-50'>ALL DOCTORS</p></NavLink>
+                    <NavLink onClick={()=>setShowMenu(false)} to='/about'><p className='px-4 py-2 rounded inline-block hover:bg-blue-50'>ABOUT</p></NavLink>
+                    <NavLink onClick={()=>setShowMenu(false)} to='/contact'><p className='px-4 py-2 rounded inline-block hover:bg-blue-50'>CONTACT</p></NavLink>
+                    <NavLink onClick={()=>setShowMenu(false)} to='/disease-predictor'><p className='px-4 py-2 rounded inline-block hover:bg-blue-50'>DISEASE PREDICTOR</p></NavLink>
+
+                </ul>
+            </div>
+           
+        </div>
+    </div>
+  )
+}
+
+export default Navbar
