@@ -1,7 +1,8 @@
 import { createContext, useState } from "react";
 import axios from 'axios'
 import {toast} from 'react-toastify'
-import appointmentModel from "../../../backend/models/appointmentModel";
+
+
 
 export const DoctorContext = createContext()
 
