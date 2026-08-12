@@ -10,9 +10,9 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Large Model files (Trained models and Scalers)
-*.sav
-*.joblib
+# Large Model files (keeping .pkl, .h5, .onnx ignored but ALLOWING .sav and .joblib for deployment)
+# *.sav     ← allowed so Render can use trained_model.sav
+# *.joblib  ← allowed so Render can use scaler.joblib
 *.pkl
 *.h5
 *.onnx
